@@ -1,0 +1,13 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,104,80,129"/>
+<area shape="rect" id="Node000001" href="$classItemCodeDialog.html" title=" " alt="" coords="136,5,263,31"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="63,92,92,65,127,40,151,28,154,33,129,44,95,69,66,96"/>
+<area shape="rect" id="Node000002" href="$classPurchaseDialog.html" title=" " alt="" coords="138,55,261,80"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="93,98,158,78,159,83,94,103"/>
+<area shape="rect" id="Node000003" href="$classReportsDialog.html" title=" " alt="" coords="142,104,257,129"/>
+<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="94,114,142,114,142,119,94,119"/>
+<area shape="rect" id="Node000004" href="$classSalesDialog.html" title=" " alt="" coords="150,153,249,179"/>
+<area shape="poly" id="edge4_Node000000_Node000004" title=" " alt="" coords="94,130,159,151,158,156,93,135"/>
+<area shape="rect" id="Node000005" href="$classVendorCodeDialog.html" title=" " alt="" coords="128,203,271,228"/>
+<area shape="poly" id="edge5_Node000000_Node000005" title=" " alt="" coords="67,137,96,163,129,188,156,200,154,205,127,192,92,168,64,141"/>
+</map>

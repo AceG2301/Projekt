@@ -1,0 +1,69 @@
+@startuml Inventory_System_Use_Cases
+
+!pragma layout smetana
+
+title Inventory Management System - Use Case Diagram
+
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor White
+  BorderColor #2f2f2f
+}
+skinparam actor {
+  BorderColor #2f2f2f
+}
+
+actor "Manager" as M
+actor "Vendor" as V
+actor "Customer" as C
+
+rectangle "Inventory Management System" {
+  package "Setup" {
+    usecase "Open Inventory System" as UC_Open
+  }
+
+  package "Master Data" {
+    usecase "Register Item" as UC_Item
+    usecase "Register Vendor" as UC_Vendor
+  }
+
+  package "Transactions" {
+    usecase "Record Purchase" as UC_Purchase
+    usecase "Record Sale" as UC_Sale
+  }
+
+  package "Reports" {
+    usecase "View Purchase Report" as UC_PurchaseReport
+    usecase "View Sales Report" as UC_SalesReport
+  }
+}
+
+M -- UC_Open
+M -- UC_Item
+M -- UC_Vendor
+M -- UC_Purchase
+M -- UC_Sale
+M -- UC_PurchaseReport
+M -- UC_SalesReport
+
+UC_Purchase -- V : supplier
+UC_Sale -- C : buyer
+
+note right of UC_Purchase
+The system validates the vendor and item,
+records the purchase, and increases stock.
+end note
+
+note right of UC_Sale
+The system validates the buyer and item,
+checks available stock, records the sale,
+and decreases stock.
+end note
+
+legend bottom
+Database queries, invoice numbers, calculations, and stock updates
+belong in the textual use-case descriptions, not as separate actor goals.
+endlegend
+
+@enduml
