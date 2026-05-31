@@ -1,0 +1,117 @@
+@startuml
+title Design Model - Inventory Qt Application
+
+skinparam classAttributeIconSize 0
+
+class MainWindow {
+  - ui : Ui::MainWindow*
+  - db : QSqlDatabase
+  - setupDatabase()
+  - on_actionItem_Code_triggered()
+  - on_actionVendor_Code_triggered()
+  - on_actionPurchase_triggered()
+  - on_actionSale_Invoice_triggered()
+  - on_actionVendor_Wise_triggered()
+  - on_actionDate_Wise_triggered()
+  - on_actionDate_Wise_2_triggered()
+}
+
+class ItemCodeDialog {
+  - ui : Ui::ItemCodeDialog*
+  - db : QSqlDatabase*
+  - unitsComboBoxModel : QSqlQueryModel*
+  - initializeModels()
+  - setupModels()
+  - setupUnitsComboBoxModel()
+  - validateForm() : bool
+  - addItem() : bool
+  - resetForm()
+}
+
+class VendorCodeDialog {
+  - ui : Ui::VendorCodeDialog*
+  - db : QSqlDatabase*
+  - validateForm() : bool
+  - addVendor() : bool
+  - resetForm()
+}
+
+class PurchaseDialog {
+  - ui : Ui::PurchaseDialog*
+  - db : QSqlDatabase*
+  - vendor_name_model : QSqlQueryModel*
+  - vendor_code : QString
+  - initializeModels()
+  - setupModels()
+  - setupVendorNameCompleter()
+  - loadInvoiceNumber()
+  - validateForm() : bool
+  - processPurchase() : bool
+}
+
+class SalesDialog {
+  - ui : Ui::SalesDialog*
+  - db : QSqlDatabase*
+  - vendor_code : QString
+  - vendor_name_model : QSqlQueryModel*
+  - setupModels()
+  - loadInvoiceNumber()
+  - setupVendorNameCompleter()
+  - validateForm() : bool
+  - processSale() : bool
+}
+
+class ReportsDialog {
+  - ui : Ui::ReportsDialog*
+  - reportType : qint8
+  - reportModel : QSqlQueryModel*
+  - db : QSqlDatabase*
+  + setDates()
+  + setupModel()
+  + setupDateWiseSalesModel()
+  + setupDateWisePurchaseModel()
+}
+
+enum ReportType {
+  SALES_VENDORWISE
+  SALES_ITEMWISE
+  SALES_DATEWISE
+  PURCHASE_VENDORWISE
+  PURCHASE_ITEMWISE
+  PURCHASE_DATEWISE
+}
+
+class QMainWindow <<Qt>>
+class QDialog <<Qt>>
+class QSqlDatabase <<Qt>>
+class QSqlQueryModel <<Qt>>
+
+QMainWindow <|-- MainWindow
+
+QDialog <|-- ItemCodeDialog
+QDialog <|-- VendorCodeDialog
+QDialog <|-- PurchaseDialog
+QDialog <|-- SalesDialog
+QDialog <|-- ReportsDialog
+
+MainWindow *-- QSqlDatabase
+MainWindow ..> ItemCodeDialog : opens
+MainWindow ..> VendorCodeDialog : opens
+MainWindow ..> PurchaseDialog : opens
+MainWindow ..> SalesDialog : opens
+MainWindow ..> ReportsDialog : opens
+
+ItemCodeDialog o-- QSqlDatabase
+VendorCodeDialog o-- QSqlDatabase
+PurchaseDialog o-- QSqlDatabase
+SalesDialog o-- QSqlDatabase
+ReportsDialog o-- QSqlDatabase
+
+ItemCodeDialog *-- QSqlQueryModel : unitsComboBoxModel
+PurchaseDialog *-- QSqlQueryModel : vendor_name_model
+SalesDialog *-- QSqlQueryModel : vendor_name_model
+ReportsDialog *-- QSqlQueryModel : reportModel
+
+ReportsDialog ..> ReportType
+
+@enduml

@@ -1,0 +1,216 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{url}
+
+\begin{document}
+	
+	\begin{titlepage}
+		\centering
+		
+		{\Large Hochschule für Technik und Wirtschaft Berlin\par}
+		\vspace{1cm}
+		
+		{\Large Lehrveranstaltung: Softwaretechnik\par}
+		\vspace{2cm}
+		
+		{\Huge\bfseries Inventory Management Systems\par}
+		\vspace{0.5cm}
+		
+		{\Large Meilenstein MS01\par}
+		\vspace{2cm}
+		
+		\begin{flushleft}
+			\textbf{Projekt:} Inventory Management System / WareHouse \\[0.3cm]
+			\textbf{Quelle:} \url{https://github.com/ZeroCoolHacker/Inventory} \\[0.3cm]
+			\textbf {Authors:}\\ [0.3cm]
+			\textbf Rey Krisna Tri Dalmesta \\[0.3cm]
+			\textbf Rey Indra Tri Dalmesta (s0587277) \\[0.3cm]
+			\textbf SoftwareTechnik \\[0.3cm]
+		\end{flushleft}
+		
+		\vfill
+		
+	\end{titlepage}
+	
+	\tableofcontents
+	\newpage
+	
+	\section{Informelle Beschreibung der Software}
+	
+	Die untersuchte Software ist eine Lagerverwaltungssoftware mit dem Namen
+	\texttt{WareHouse}. Das Projekt ist eine Desktop-Anwendung, die in C++ mit dem
+	Qt-Framework entwickelt wurde. Die Anwendung verwendet eine lokale
+	SQLite-Datenbank zur Speicherung der Daten.
+	
+	\subsection{Zweck der Software}
+	
+	Der Zweck der Software ist die Verwaltung einfacher Lagerprozesse. Mit der
+	Anwendung können Artikel, Lieferanten, Einkaufsvorgänge, Verkaufsvorgänge und
+	Berichte verwaltet werden.
+	
+	Die Software unterstützt folgende zentrale Funktionen:
+	
+	\begin{itemize}
+		\item Verwaltung von Artikeln
+		\item Verwaltung von Lieferanten
+		\item Erfassung von Einkäufen
+		\item Erfassung von Verkäufen
+		\item Aktualisierung des Lagerbestands nach Einkauf oder Verkauf
+		\item Anzeige von Einkaufs- und Verkaufsberichten
+		\item Speicherung der Daten in einer SQLite-Datenbank
+	\end{itemize}
+	
+	Die Software eignet sich daher für ein kleines Lager oder ein einfaches
+	Geschäft, in dem Warenbestand, Lieferanten und Rechnungen verwaltet werden
+	müssen. Es handelt sich nicht um ein vollständiges ERP-System, sondern um eine
+	überschaubare Anwendung für grundlegende Lagerverwaltung.
+	
+	\subsection{Nutzerrollen}
+	
+	Im Quellcode gibt es keine Benutzerverwaltung mit Login oder verschiedenen
+	technischen Benutzerkonten. Für das fachliche Modell können jedoch folgende
+	Nutzerrollen beschrieben werden:
+	
+	\begin{description}
+		\item[Mitarbeiter]
+		Der Mitarbeiter ist der Hauptnutzer der Software. Er bedient die grafische
+		Oberfläche und führt die Lagerprozesse aus. Dazu gehören das Anlegen von
+		Artikeln und Lieferanten, das Erfassen von Einkäufen und Verkäufen sowie
+		das Anzeigen von Berichten.
+		
+		\item[Lieferant]
+		Der Lieferant ist eine externe Rolle. Lieferantendaten werden im System
+		gespeichert und bei Einkaufsvorgängen verwendet. Der Lieferant benutzt die
+		Software jedoch nicht direkt.
+		
+		\item[Kunde]
+		Der Kunde ist ebenfalls eine externe Rolle. Bei Verkaufsvorgängen werden
+		Kundendaten beziehungsweise Käuferinformationen verwendet. Auch der Kunde
+		arbeitet nicht direkt mit der Software, sondern wird durch den Mitarbeiter
+		im System erfasst.
+		
+		\item[System]
+		Das System speichert die eingegebenen Daten, prüft Eingaben, aktualisiert
+		den Lagerbestand und liest Daten aus der SQLite-Datenbank für Berichte.
+	\end{description}
+	
+	\subsection{Quelle der Software}
+	
+	Die Software basiert auf einem bestehenden Open-Source-Projekt auf GitHub:
+	
+	\begin{center}
+		\url{https://github.com/ZeroCoolHacker/Inventory}
+	\end{center}
+	
+	Für die Analyse wurde der Quellcode des Projekts untersucht. Wichtige
+	Bestandteile sind die Qt-Klassen für das Hauptfenster, Artikel, Lieferanten,
+	Einkäufe, Verkäufe und Berichte sowie die lokale SQLite-Datenbank.
+	
+
+	\section{Geplante Erweiterungen und Verbesserungen}
+	
+	Für die zweite Projektphase ist geplant, die bestehende Lagerverwaltungssoftware
+	gezielt zu erweitern. 
+	
+	\subsection{Kundenverwaltung}
+	
+	Die Software soll um eine Kundenverwaltung erweitert werden. Bisher stehen vor
+	allem Artikel, Lieferanten, Einkäufe und Verkäufe im Mittelpunkt. Durch eine
+	eigene Kundenverwaltung können Kundendaten gespeichert und mit Verkaufsvorgängen
+	verbunden werden.
+	
+	Geplante Funktionen:
+	
+	\begin{itemize}
+		\item Kunden anlegen
+		\item Kundendaten bearbeiten
+		\item Kunden löschen
+		\item Kunden mit Verkäufen verknüpfen
+		\item Verkaufshistorie eines Kunden anzeigen
+	\end{itemize}
+	
+	\subsection{Bestandswarnung}
+	
+	Das System soll eine Warnung anzeigen, wenn der Lagerbestand eines Artikels
+	unter einen festgelegten Mindestwert fällt. Dadurch kann der Nutzer rechtzeitig
+	erkennen, welche Artikel nachbestellt werden müssen.
+	
+	Geplante Funktionen:
+	
+	\begin{itemize}
+		\item Mindestbestand pro Artikel speichern
+		\item niedrigen Lagerbestand automatisch erkennen
+		\item Warnmeldung oder Markierung in der Artikelübersicht anzeigen
+		\item betroffene Artikel in einem Bericht anzeigen
+	\end{itemize}
+	
+	\subsection{Inventarhistorie}
+	
+	Zusätzlich soll eine Historie für Bestandsänderungen eingeführt werden. Jede
+	Änderung am Lagerbestand soll nachvollziehbar gespeichert werden. Dadurch kann
+	später geprüft werden, warum sich der Bestand eines Artikels verändert hat.
+	
+	Geplante Informationen in der Historie:
+	
+	\begin{itemize}
+		\item betroffener Artikel
+		\item Art der Änderung, zum Beispiel Einkauf oder Verkauf
+		\item geänderte Menge
+		\item Bestand vor und nach der Änderung
+		\item Zeitpunkt der Änderung
+	\end{itemize}
+	
+	\subsection{Lieferantenbestellungen}
+	
+	Die Software soll außerdem um einfache Lieferantenbestellungen erweitert werden.
+	Wenn ein Artikel einen niedrigen Bestand hat, soll daraus eine Bestellung bei
+	einem Lieferanten erstellt werden können.
+	
+	Geplante Funktionen:
+	
+	\begin{itemize}
+		\item Bestellung für einen Lieferanten erstellen
+		\item mehrere Artikel zu einer Bestellung hinzufügen
+		\item offene Bestellungen anzeigen
+		\item Bestellung als erhalten markieren
+		\item Lagerbestand nach Wareneingang aktualisieren
+	\end{itemize}
+	
+	\subsection{Benutzerverwaltung und Rollen}
+	
+	Die bestehende Software besitzt keine technische Benutzerverwaltung. Zwar können
+	im Use-Case-Modell mehrere fachliche Akteure wie Mitarbeiter, Lieferant und
+	Kunde unterschieden werden, diese sind jedoch keine implementierten
+	Benutzerkonten mit eigenen Zugriffsrechten. Eine geplante Erweiterung ist daher
+	die Einführung einer Benutzerverwaltung mit Login-Funktion und Rollen wie Admin
+	und Mitarbeiter.
+	
+	Geplante Rollen:
+	
+	\begin{description}
+		\item[Admin]
+		Der Admin kann Benutzer verwalten, Artikel und Lieferanten bearbeiten,
+		Berichte ansehen und kritische Daten löschen.
+		
+		\item[Mitarbeiter]
+		Der Mitarbeiter kann Artikel ansehen, Einkäufe und Verkäufe erfassen und
+		Berichte abrufen. Kritische Verwaltungsfunktionen sind eingeschränkt.
+	\end{description}
+	
+	Geplante Funktionen:
+	
+	\begin{itemize}
+		\item Login
+		\item Logout
+		\item Benutzer anlegen
+		\item Benutzer bearbeiten
+		\item Benutzer löschen
+		\item Rechte je nach Rolle einschränken
+	\end{itemize}
+	
+	
+	
+\end{document}

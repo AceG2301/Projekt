@@ -1,0 +1,84 @@
+@startuml Inventory_Domain_Model
+
+title Inventory Management System - Domain Model
+
+hide methods
+skinparam classAttributeIconSize 0
+
+class BusinessPartner {
+  +partnerCode: int
+  +name: text
+  +address: text
+}
+
+class Vendor <<role>>
+class Buyer <<role>>
+
+class Unit {
+  +id: int
+  +unitName: text
+}
+
+class Item {
+  +itemCode: int
+  +description: text
+  +quantity: real
+}
+
+abstract class Invoice {
+  +invoiceNo: int
+  +date: date
+  +quantity: real
+  +ratePerUnit: real
+  +amountPaid: real
+}
+
+class PurchaseInvoice
+class SalesInvoice
+
+Vendor --|> BusinessPartner
+Buyer --|> BusinessPartner
+
+Invoice <|-- PurchaseInvoice
+Invoice <|-- SalesInvoice
+
+Unit "1" <-- "0..*" Item : measured in
+
+Item "1" <-- "0..*" PurchaseInvoice : purchased item
+Item "1" <-- "0..*" SalesInvoice : sold item
+
+Vendor "1" <-- "0..*" PurchaseInvoice : supplier
+Buyer "1" <-- "0..*" SalesInvoice : customer
+
+note right of BusinessPartner
+Implemented in the database as table: vendors.
+
+The application reuses the same table
+for both vendors and buyers/customers.
+end note
+
+note right of Item
+Implemented in the database as table: items.
+
+Item.quantity represents the current stock.
+end note
+
+note bottom of PurchaseInvoice
+A purchase increases the stock quantity
+of the selected item.
+end note
+
+note bottom of SalesInvoice
+A sale decreases the stock quantity
+of the selected item.
+
+Sale quantity must not exceed available stock.
+end note
+
+note bottom of Invoice
+Invoice amount is based on:
+
+quantity * ratePerUnit
+end note
+
+@enduml
